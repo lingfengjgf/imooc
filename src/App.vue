@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import Home from './views/Home.vue'
+// import Home from './views/Home.vue'
+// import Editor from './views/Editor.vue';
+import Detail from './views/Detail.vue';
 </script>
 
 <template>
   <div>
-    <Home></Home>
+    <Detail></Detail>
   </div>
 </template>
 
