@@ -1,10 +1,5 @@
 import { defineStore } from "pinia";
 
-export interface UserProps {
-  isLogin: boolean;
-  userName?: string;
-}
-
 export interface DetailProps {
   id: number;
   title: string;
@@ -13,8 +8,7 @@ export interface DetailProps {
   copiedCount: number;
 }
 
-export interface GlobalDataProps {
-  user: UserProps;
+export interface DetailsProps {
   list: DetailProps[];
 }
 
@@ -70,10 +64,9 @@ const testData: DetailProps[] = [
   },
 ];
 
-export const useGlobalStore = defineStore("global", {
-  state: (): GlobalDataProps => ({
+export const useDetailStore = defineStore("detail", {
+  state: (): DetailsProps => ({
     list: testData,
-    user: { isLogin: false },
   }),
   getters: {
     getDetailId: (state) => {

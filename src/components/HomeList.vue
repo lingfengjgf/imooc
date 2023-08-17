@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'detail', params: { id: item.id } }">
           <a-card hoverable style="width: 100%">
             <template #cover>
-              <img :src="item.img" v-if="item && item.img" />
+              <img class="item-img" :src="item.img" v-if="item && item.img" />
             </template>
             <a-card-meta :title="item.title">
               <template #description>
@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { DetailProps } from "../stores";
+import { DetailProps } from "../stores/detail";
 export default defineComponent({
   name: "home-list",
   props: {
@@ -36,9 +36,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
+.poster-item {
+  margin-bottom: 20px;
+}
 .poster-item .ant-card-cover {
   height: 390px;
+  overflow: hidden;
 }
 .info {
   font-size: 14px;

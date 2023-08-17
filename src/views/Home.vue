@@ -1,14 +1,14 @@
 <template>
   <div class="home-content">
-    <HomeList :list="golbalStore.list"></HomeList>
+    <HomeList :list="detailStore.list"></HomeList>
   </div>
 </template>
 
 <script setup lang="ts">
 import HomeList from "../components/HomeList.vue";
-import { useGlobalStore } from "../stores";
+import { useDetailStore } from "../stores/detail";
 
-const golbalStore = useGlobalStore();
+const detailStore = useDetailStore();
 </script>
 
 <style scoped>
