@@ -13,35 +13,48 @@
       <div class="editor-content">
         <div class="editor-title">画布区域</div>
         <div class="editor-draw" id="canvas-area">
-          <div
-            class="editor-comp"
+          <edit-wrapper
+            @setActive="setActive"
             v-for="comp in editorStore.components"
             :key="comp.id"
+            :id="comp.id"
+            :active="comp.id === currentElement?.id"
           >
-            <component :is="comp.name" v-bind="comp.props">
-              {{ comp.props.text }}
-            </component>
-            <a-button
-              @click="delItem(comp.id)"
-              class="editor-btn"
-              danger
-              size="small"
-              >删除</a-button
-            >
-          </div>
+            <div class="editor-comp">
+              <component :is="comp.name" v-bind="comp.props">
+                {{ comp.props.text }}
+              </component>
+              <a-button
+                @click="delItem(comp.id)"
+                class="editor-btn"
+                danger
+                size="small"
+                >删除</a-button
+              >
+            </div>
+          </edit-wrapper>
         </div>
       </div>
     </a-layout-content>
     <a-layout-sider width="300">
       <div class="editor-right">
         <div class="editor-title">组件属性</div>
+        <props-table
+          v-if="currentElement && currentElement.props"
+          :props="currentElement.props"
+          @change="handleChange"
+        ></props-table>
+        <pre>{{ currentElement?.props }}</pre>
       </div>
     </a-layout-sider>
   </a-layout>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import ComponentList from "../components/ComponentList.vue";
+import EditWrapper from "../components/EditWrapper.vue";
+import PropsTable from "../components/PropsTable.vue";
 import { defaultTextTemplates } from "../defaultTextTemplates";
 import { useEditorStore } from "../stores/editor";
 const editorStore = useEditorStore();
@@ -50,6 +63,13 @@ const addItem = (props: any) => {
 };
 const delItem = (id: string) => {
   editorStore.delComponent(id);
+};
+const setActive = (id: string) => {
+  editorStore.setActive(id);
+};
+const currentElement = computed(() => editorStore.getCurrentElement);
+const handleChange = (e: any) => {
+  editorStore.updateComponent(e);
 };
 </script>
 
@@ -83,7 +103,7 @@ export default defineComponent({
   position: relative;
 }
 .editor-right {
-  background: pink;
+  background: #fff;
 }
 .editor-title {
   font-size: 18px;
