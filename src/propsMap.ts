@@ -1,4 +1,4 @@
-import { VNode } from "vue";
+import { VNode, h } from "vue";
 import { TextComponentProps } from "./defaultProps";
 
 export interface PropToForm {
@@ -23,9 +23,7 @@ const fontFamilyArr = [
 const fontFamilyOptions = fontFamilyArr.map((font) => {
   return {
     value: font.value,
-    text: (
-      <span style={{ fontFamily: font.value }}>{font.text}</span>
-    ) as VNode,
+    text: h("span", { style: { fontFamily: font.value } }, font.text) as VNode,
   };
 });
 

@@ -40,5 +40,6 @@ export default defineComponent({
 .component-list-item {
   padding: 10px;
   text-align: center;
+  cursor: pointer;
 }
 </style>
