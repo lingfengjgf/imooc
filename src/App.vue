@@ -5,6 +5,7 @@
         <router-link to="/">慕课乐高</router-link>
         <user-profile :user="user"></user-profile>
       </a-layout-header>
+      <!-- <Uploader action=""></Uploader> -->
       <a-layout-content class="content">
         <router-view></router-view>
       </a-layout-content>
@@ -25,6 +26,7 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 import UserProfile from "./components/UserProfile.vue";
 import { useUserStore } from "./stores/user";
+// import Uploader from "./components/Uploader.vue";
 
 const user = useUserStore();
 
